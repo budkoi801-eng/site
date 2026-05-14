@@ -3,84 +3,691 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>maksimalni.top</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <title>Maximal-Net — Быстрый и безопасный VPN</title>
+  <meta name="description" content="Maximal-Net — современный VPN-сервис с высокой скоростью, приватностью и стабильным подключением." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg: #060816;
+      --bg-secondary: #0d1022;
+      --card: rgba(20, 24, 48, 0.75);
+      --accent: #7c4dff;
+      --accent-2: #00d4ff;
+      --text: #ffffff;
+      --muted: #a8b0d3;
+      --border: rgba(255,255,255,0.08);
+      --glow: 0 0 40px rgba(124, 77, 255, 0.45);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #1a1a1a, #000000 80%);
-      font-family: 'Nunito', sans-serif;
-      color: #ffffff;
-      overflow: hidden;
-      position: relative;
+      font-family: 'Manrope', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,77,255,0.28), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(0,212,255,0.18), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+      z-index: 999;
     }
 
     .container {
-      text-align: center;
-      padding: 20px;
-      z-index: 1;
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(6, 8, 22, 0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-box {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: 0.25s ease;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: var(--glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .hero {
+      padding: 110px 0 90px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      margin-bottom: 22px;
     }
 
     h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-      text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea33;
+      font-size: clamp(3rem, 6vw, 5.8rem);
+      line-height: 0.95;
+      margin-bottom: 26px;
+      font-weight: 800;
     }
 
-    p {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-bottom: 40px;
-      letter-spacing: 0.05em;
-      text-shadow: 0 0 6px #ffffff33;
+    .gradient-text {
+      background: linear-gradient(135deg, #fff, #8be9ff, #a56eff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .hippos {
+    .hero p {
+      color: var(--muted);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      max-width: 620px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
       display: flex;
-      justify-content: center;
       gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .glass-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      backdrop-filter: blur(18px);
+      padding: 32px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+      pointer-events: none;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .stat {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stat h3 {
       font-size: 2rem;
+      margin-bottom: 8px;
     }
 
-    .hippo {
-      animation: jump 1.6s ease-in-out infinite;
+    .section {
+      padding: 90px 0;
     }
 
-    .hippo:nth-child(2) { animation-delay: 0.2s; }
-    .hippo:nth-child(3) { animation-delay: 0.4s; }
-    .hippo:nth-child(4) { animation-delay: 0.6s; }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin-bottom: 16px;
+      text-align: center;
+    }
 
-    @keyframes jump {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-25px); }
+    .section-subtitle {
+      color: var(--muted);
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+      line-height: 1.7;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .feature-card {
+      padding: 28px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124,77,255,0.5);
+      box-shadow: var(--glow);
+    }
+
+    .feature-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(124,77,255,0.25), rgba(0,212,255,0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .price-card {
+      position: relative;
+      padding: 32px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.3s ease;
+      overflow: hidden;
+    }
+
+    .price-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--glow);
+      border-color: rgba(124,77,255,0.6);
+    }
+
+    .popular {
+      border: 1px solid rgba(0,212,255,0.5);
+      background: linear-gradient(180deg, rgba(124,77,255,0.15), rgba(255,255,255,0.03));
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .price-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .price small {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin-bottom: 26px;
+    }
+
+    .price-card li {
+      padding: 10px 0;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .cta {
+      text-align: center;
+      padding: 100px 0;
+    }
+
+    .cta-box {
+      padding: 60px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, rgba(124,77,255,0.18), rgba(0,212,255,0.12));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .docs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .doc-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 26px;
+      padding: 28px;
+    }
+
+    .doc-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 14px;
+    }
+
+    footer {
+      padding: 50px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .cta-box {
+        padding: 36px 24px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="noise"></div>
 
-  <div class="container">
-    <h1>maksimalni.top</h1>
-    <p>Сайт скоро станет доступен</p>
-    <div class="hippos">
-      <span class="hippo">🦛</span>
-      <span class="hippo">🦛</span>
-      <span class="hippo">🦛</span>
-      <span class="hippo">🦛</span>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-box">
+              <img src="logo.png" alt="Maximal-Net Logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='MN';">
+            </div>
+        <span>Maximal-Net</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#features">Преимущества</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#docs">Документы</a>
+        <a href="#contact">Контакты</a>
+      </div>
     </div>
-  </div>
+  </header>
 
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">
+          ⚡Secure VPN Platform
+        </div>
+
+        <h1>
+          VPN нового поколения<br>
+          <span class="gradient-text">для скорости и приватности</span>
+        </h1>
+
+        <p>
+          Maximal-Net — быстрый VPN-сервис с современным шифрованием,
+          высокой скоростью подключения и стабильной работой.
+          Подходит для повседневного использования, стриминга, работы и защиты трафика.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary">Выбрать тариф</a>
+          <a href="#docs" class="btn" style="border:1px solid rgba(255,255,255,0.1); color:white;">
+            Юридическая информация
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h2 style="font-size:2rem; margin-bottom:16px;">
+          Почему выбирают Maximal-Net
+        </h2>
+
+        <p style="color:var(--muted); line-height:1.7;">
+          Мы делаем упор на стабильность, безопасность и удобство.
+          Без лишних сложностей — просто подключайся и работай.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <h3>99.9%</h3>
+            <span>Стабильность сети</span>
+          </div>
+
+          <div class="stat">
+            <h3>24/7</h3>
+            <span>Доступ к серверам</span>
+          </div>
+
+          <div class="stat">
+            <h3>AES-256</h3>
+            <span>Шифрование</span>
+          </div>
+
+          <div class="stat">
+            <h3>∞</h3>
+            <span>Безлимитный трафик</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <h2 class="section-title">Преимущества сервиса</h2>
+      <p class="section-subtitle">
+        Современная инфраструктура, стильный интерфейс и надежное подключение.
+        Всё, что нужно от качественного VPN.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Приватность</h3>
+          <p style="color:var(--muted); line-height:1.7; margin-top:12px;">
+            Надежное шифрование трафика и защита соединения.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Высокая скорость</h3>
+          <p style="color:var(--muted); line-height:1.7; margin-top:12px;">
+            Оптимизированные сервера для комфортного серфинга и стриминга.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>Мировая сеть</h3>
+          <p style="color:var(--muted); line-height:1.7; margin-top:12px;">
+            Доступ к серверам в разных регионах мира.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Все устройства</h3>
+          <p style="color:var(--muted); line-height:1.7; margin-top:12px;">
+            Поддержка смартфонов, ПК, планшетов и роутеров.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="container">
+      <h2 class="section-title">Тарифы</h2>
+      <p class="section-subtitle">
+        Простые и прозрачные тарифы без скрытых условий.
+      </p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>14 дней</h3>
+          <div class="price">100 ₽</div>
+          <ul>
+            <li>Полный доступ</li>
+            <li>Высокая скорость</li>
+            <li>Поддержка устройств</li>
+          </ul>
+          <a href="https://t.me/maximal_net_bot" target="_blank" class="btn btn-primary" style="width:100%;">Подключить</a>
+        </div>
+
+        <div class="price-card popular">
+          <div class="popular-badge">Популярный</div>
+          <h3>30 дней</h3>
+          <div class="price">200 ₽</div>
+          <ul>
+            <li>Полный доступ</li>
+            <li>Стабильные сервера</li>
+            <li>Приоритетная поддержка</li>
+          </ul>
+          <a href="https://t.me/maximal_net_bot" target="_blank" class="btn btn-primary" style="width:100%;">Подключить</a>
+        </div>
+
+        <div class="price-card">
+          <h3>60 дней</h3>
+          <div class="price">380 ₽</div>
+          <ul>
+            <li>Безлимитный трафик</li>
+            <li>Высокий uptime</li>
+            <li>Мультиплатформа</li>
+          </ul>
+          <a href="https://t.me/maximal_net_bot" target="_blank" class="btn btn-primary" style="width:100%;">Подключить</a>
+        </div>
+
+        <div class="price-card">
+          <h3>90 дней</h3>
+          <div class="price">540 ₽</div>
+          <ul>
+            <li>Максимальная выгода</li>
+            <li>Стабильная сеть</li>
+            <li>Шифрование AES-256</li>
+          </ul>
+          <a href="https://t.me/maximal_net_bot" target="_blank" class="btn btn-primary" style="width:100%;">Подключить</a>
+        </div>
+
+        <div class="price-card">
+          <h3>180 дней</h3>
+          <div class="price">990 ₽</div>
+          <ul>
+            <li>Лучшее соотношение цены</li>
+            <li>Премиум каналы</li>
+            <li>Надежная работа</li>
+          </ul>
+          <a href="https://t.me/maximal_net_bot" target="_blank" class="btn btn-primary" style="width:100%;">Подключить</a>
+        </div>
+
+        <div class="price-card">
+          <h3>360 дней</h3>
+          <div class="price">1790 ₽</div>
+          <ul>
+            <li>Годовой доступ</li>
+            <li>Максимальная экономия</li>
+            <li>Полный функционал</li>
+          </ul>
+          <a href="https://t.me/maximal_net_bot" target="_blank" class="btn btn-primary" style="width:100%;">Подключить</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="section-title" style="margin-bottom:20px;">
+          Готов к быстрому и безопасному интернету?
+        </h2>
+
+        <p class="section-subtitle" style="margin-bottom:30px;">
+          Подключай Maximal-Net и получай стабильный VPN-сервис
+          с современным уровнем защиты.
+        </p>
+
+        <a href="https://t.me/maximal_net_bot" target="_blank" class="btn btn-primary">Связаться для подключения</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="docs">
+    <div class="container">
+      <h2 class="section-title">Юридическая информация</h2>
+      <p class="section-subtitle">
+        Базовые документы для работы с платежными системами и сервисами.
+      </p>
+
+      <div class="docs">
+        <div class="doc-card">
+          <h3>Политика конфиденциальности</h3>
+          <p>
+            Сервис Maximal-Net уважает право пользователей на конфиденциальность.
+            Мы можем собирать техническую информацию, необходимую для работы сервиса,
+            обработки заявок и улучшения качества обслуживания.
+            Персональные данные не передаются третьим лицам без законных оснований.
+            Пользователь соглашается с обработкой данных при использовании сайта.
+          </p>
+        </div>
+
+        <div class="doc-card">
+          <h3>Публичная оферта</h3>
+          <p>
+            Используя сервис Maximal-Net, пользователь принимает условия настоящей оферты.
+            VPN-доступ предоставляется на оплаченный период согласно выбранному тарифу.
+            Сервис предоставляется по модели «как есть».
+            Пользователь обязуется соблюдать законодательство своей страны
+            и не использовать сервис в противоправных целях.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:12px;">
+          <div class="logo-box">
+              <img src="logo.png" alt="Maximal-Net Logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='MN';">
+            </div>
+          <span>Maximal-Net</span>
+        </div>
+
+        <p>
+          Современный VPN-сервис для скорости, безопасности и стабильного подключения.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#features">Преимущества</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#docs">Документы</a>
+        <a href="https://t.me/maineex" target="_blank">@maineex</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
